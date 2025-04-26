@@ -46,9 +46,9 @@ void CResourceManager::LoadAllSprites() {
     //Just load menu skins for now (just standing right sprite)
     for (short k = 0; k < MAX_PLAYERS; k++) {
         //LoadMenuSkin(k, game_values.skinids[k], game_values.colorids[k], false);
-        LoadFullSkin(spr_shyguy[k], convertPath("gfx/packs/modeskins/shyguy.bmp", graphicspack), k);
-        LoadFullSkin(spr_chocobo[k], convertPath("gfx/packs/modeskins/chicken.bmp", graphicspack), k);
-        LoadFullSkin(spr_bobomb[k], convertPath("gfx/packs/modeskins/bobomb.bmp", graphicspack), k);
+        LoadFullSkin(spr_shyguy[k], convertPath("gfx/packs/modeskins/shyguy.png", graphicspack), k);
+        LoadFullSkin(spr_chocobo[k], convertPath("gfx/packs/modeskins/chicken.png", graphicspack), k);
+        LoadFullSkin(spr_bobomb[k], convertPath("gfx/packs/modeskins/bobomb.png", graphicspack), k);
     }
 
     gfx_loadimage(&menu_survival, convertPath("gfx/packs/modeobjects/menu_survival.png", graphicspack), false);
