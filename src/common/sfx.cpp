@@ -18,11 +18,25 @@ sfxSound * g_PlayingSoundChannels[NUM_SOUND_CHANNELS];
 
 bool sfx_init()
 {
-	Mix_OpenAudio(44100, AUDIO_S16, 2, 2048);
-	Mix_AllocateChannels(NUM_SOUND_CHANNELS);
+    // Initialize audio with typical OGG-compatible settings
+    if(Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) == -1) {
+        libretro_printf("Mix_OpenAudio failed: %s\n", Mix_GetError());
+        return false;
+    }
 
-	for (short iChannel = 0; iChannel < NUM_SOUND_CHANNELS; iChannel++)
-		g_PlayingSoundChannels[iChannel] = NULL;
+    Mix_AllocateChannels(NUM_SOUND_CHANNELS);
+
+    // Enable OGG support
+    int flags = MIX_INIT_OGG;
+    int initted = Mix_Init(flags);
+    if((initted & flags) != flags) {
+        libretro_printf("Mix_Init: Failed to init required ogg support!\n");
+        libretro_printf("Mix_Init: %s\n", Mix_GetError());
+        return false;
+    }
+
+    for (short iChannel = 0; iChannel < NUM_SOUND_CHANNELS; iChannel++)
+        g_PlayingSoundChannels[iChannel] = NULL;
 
 #if !defined(__EMSCRIPTEN__) && !defined(__LIBRETRO__)
     const SDL_version *link_version = Mix_Linked_Version();
@@ -41,7 +55,9 @@ bool sfx_init()
 void sfx_close()
 {
 	Mix_CloseAudio();
+    Mix_Quit();
 }
+
 
 void sfx_stopallsounds()
 {
