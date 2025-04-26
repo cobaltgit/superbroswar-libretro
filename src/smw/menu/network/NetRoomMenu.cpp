@@ -89,7 +89,7 @@ void UI_NetRoomMenu::Refresh()
 
         // Reload player skins
         std::ostringstream path;
-        path << GetHomeDirectory() << "net_skin" << p << ".png";
+        path << GetHomeDirectory() << "net_skin" << p << ".bmp";
         if (p == netplay.remotePlayerNumber) {
             printf("  player %d -> local\n", p);
             rm->LoadMenuSkin(p, game_values.skinids[0], p, false);

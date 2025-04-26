@@ -1602,7 +1602,7 @@ void MenuState::StartGame()
                 }
                 else {
                     std::ostringstream path;
-                    path << GetHomeDirectory() << "net_skin" << k << ".png";
+                    path << GetHomeDirectory() << "net_skin" << k << ".bmp";
                     //printf("  player %d -> %s\n", k, path.str().c_str());
 
                     if (!rm->LoadFullSkin(rm->spr_player[k], path.str(), k)) {

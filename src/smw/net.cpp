@@ -660,7 +660,7 @@ void NetClient::handleSkinChangeMessage(const uint8_t* data, size_t dataLength)
     printf("[net] Skin arrived (from: %d, C:%d unC:%d)\n", playerID, compressed_size, full_size);
 
     std::ostringstream path;
-    path << GetHomeDirectory() << "net_skin" << playerID << ".png";
+    path << GetHomeDirectory() << "net_skin" << playerID << ".bmp";
     if (!FileCompressor::decompress(data + sizeof(NetPkgs::MessageHeader) + 1, path.str()))
         return;
 
